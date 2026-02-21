@@ -1,0 +1,573 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$schemaVersion": "2020-12",
+  "$id": "https://www.conexusglobalarts.media/schemas/FE_Validation_Schema_Suite_v1.2.json",
+  "title": "Forgetting Engine Validation Schema Suite (v1.2, Comprehensive Final)",
+  "description": "Unified, self-contained JSON Schema suite for validating experimental datasets related to the Forgetting Engine (FE). Includes embedded schema definitions for TSP, VRP, and Protein Folding validation. All schemas standardize 'experiment_date' as RFC 3339 date-time and duration fields as ISO 8601 durations.",
+  "version": "1.2.0",
+  "releaseDate": "2025-10-20",
+  "lastUpdated": "2025-10-20T00:00:00Z",
+  "maintainer": "Conexus Global Arts Media",
+  "contact": "research@conexusglobalarts.media",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "tsp": {
+      "description": "Pointer to the embedded TSP (Traveling Salesman Problem) experimental schema.",
+      "$ref": "#/$defs/TSP_Experimental_Schema"
+    },
+    "vrp": {
+      "description": "Pointer to the embedded VRP (Vehicle Routing Problem) validation schema.",
+      "$ref": "#/$defs/VRP_Validation_Schema"
+    },
+    "proteinFolding": {
+      "description": "Pointer to the embedded Protein Folding discovery/validation schema.",
+      "$ref": "#/$defs/ProteinFolding_Discovery_Schema"
+    }
+  },
+  "$defs": {
+    "TSP_Experimental_Schema": {
+      "$id": "#/$defs/TSP_Experimental_Schema",
+      "title": "TSP Experimental Series Schema",
+      "description": "Validation schema for TSP experimental sessions, including metadata, files, and outcomes.",
+      "type": "object",
+      "required": [
+        "TSP_Experimental_Session"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "TSP_Experimental_Session": {
+          "description": "Container for a single TSP experimental session record.",
+          "type": "object",
+          "required": [
+            "schema_version",
+            "experiment_date",
+            "session_duration",
+            "session_objective",
+            "total_files_generated",
+            "experimental_data_files",
+            "key_achievements"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "schema_version": {
+              "type": "string",
+              "description": "Semantic version of this TSP schema that the instance conforms to (e.g., '1.2.0')."
+            },
+            "experiment_date": {
+              "type": "string",
+              "format": "date-time",
+              "description": "ISO 8601 date-time when the experiment session began (e.g., '2025-10-20T14:03:00Z')."
+            },
+            "session_duration": {
+              "type": "string",
+              "format": "duration",
+              "description": "ISO 8601 duration for total session runtime (e.g., 'PT8H15M')."
+            },
+            "session_objective": {
+              "type": "string",
+              "description": "Concise statement of the experiment goal and baseline comparisons."
+            },
+            "total_files_generated": {
+              "type": "integer",
+              "minimum": 1,
+              "description": "Total count of files produced by the session (logs, results, plots, etc.)."
+            },
+            "experimental_data_files": {
+              "type": "array",
+              "description": "List of core data/result files produced during the session.",
+              "items": {
+                "$ref": "#/$defs/dataFile"
+              }
+            },
+            "code_files": {
+              "type": "array",
+              "description": "List of code artifacts used to run the experiments.",
+              "items": {
+                "$ref": "#/$defs/codeFile"
+              }
+            },
+            "visualizations": {
+              "type": "array",
+              "description": "Images/plots that summarize results or comparisons.",
+              "items": {
+                "$ref": "#/$defs/imageFile"
+              }
+            },
+            "key_achievements": {
+              "type": "array",
+              "description": "Bulleted highlights (e.g., crossover point, percentage improvements, statistical significance).",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "VRP_Validation_Schema": {
+      "$id": "#/$defs/VRP_Validation_Schema",
+      "title": "VRP Validation Schema",
+      "description": "Validation schema for VRP experiments, including metadata, Monte Carlo comparisons, and statistical tests.",
+      "type": "object",
+      "required": [
+        "VRP_Validation"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "VRP_Validation": {
+          "description": "Container for a single VRP validation record.",
+          "type": "object",
+          "required": [
+            "schema_version",
+            "experiment_metadata",
+            "monte_carlo_results",
+            "statistical_validation",
+            "breakthrough_validation"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "schema_version": {
+              "type": "string",
+              "description": "Semantic version of this VRP schema that the instance conforms to (e.g., '1.2.0')."
+            },
+            "experiment_metadata": {
+              "type": "object",
+              "description": "Identifiers and session-level metadata for the VRP validation.",
+              "required": [
+                "experiment_id",
+                "experiment_date",
+                "total_trials",
+                "validation_type"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "experiment_id": {
+                  "type": "string",
+                  "description": "Unique identifier or label for the VRP experiment batch."
+                },
+                "experiment_date": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "ISO 8601 date-time when the VRP experiment started."
+                },
+                "total_trials": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "description": "Number of independent trials included in the validation."
+                },
+                "validation_type": {
+                  "type": "string",
+                  "description": "Short descriptor of the validation purpose (e.g., 'scaling study', 'baseline comparison')."
+                }
+              }
+            },
+            "monte_carlo_results": {
+              "type": "object",
+              "description": "Summary statistics and algorithm-level outcomes for Monte Carlo and other baselines.",
+              "required": [
+                "simulations",
+                "scaleResults",
+                "algorithmResults"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "simulations": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "description": "Total Monte Carlo simulation runs executed."
+                },
+                "scaleResults": {
+                  "$ref": "#/$defs/scaleResults",
+                  "description": "Metric/value pair capturing the primary performance indicator across scales."
+                },
+                "algorithmResults": {
+                  "$ref": "#/$defs/algorithmResults",
+                  "description": "Outcome summary for a specific algorithm configuration."
+                }
+              }
+            },
+            "statistical_validation": {
+              "type": "object",
+              "description": "Statistical testing results supporting the claimed improvements.",
+              "required": [
+                "p_value",
+                "confidence_level",
+                "effect_size"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "p_value": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1,
+                  "description": "Resulting p-value from the primary hypothesis test."
+                },
+                "confidence_level": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1,
+                  "description": "Confidence level used (e.g., 0.95 for 95% CI)."
+                },
+                "effect_size": {
+                  "type": "number",
+                  "description": "Effect size estimate (e.g., Cohen's d)."
+                }
+              }
+            },
+            "breakthrough_validation": {
+              "type": "array",
+              "description": "Optional list of milestone trials/results that demonstrate breakthrough behavior.",
+              "items": {
+                "$ref": "#/$defs/trial"
+              }
+            }
+          }
+        }
+      }
+    },
+    "ProteinFolding_Discovery_Schema": {
+      "$id": "#/$defs/ProteinFolding_Discovery_Schema",
+      "title": "Protein Folding Discovery Schema",
+      "description": "Validation schema for protein folding experiments, including hypothesis, metrics, and statistical analysis.",
+      "type": "object",
+      "required": [
+        "ProteinFolding_Validation"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "ProteinFolding_Validation": {
+          "description": "Container for a single protein folding experiment record.",
+          "type": "object",
+          "required": [
+            "schema_version",
+            "discovery_title",
+            "experiment_date",
+            "hypothesis",
+            "core_innovation",
+            "experimental_validation",
+            "performance_metrics",
+            "algorithm_specifications"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "schema_version": {
+              "type": "string",
+              "description": "Semantic version of this Protein Folding schema that the instance conforms to (e.g., '1.2.0')."
+            },
+            "discovery_title": {
+              "type": "string",
+              "minLength": 10,
+              "description": "Short title describing the discovery or experiment focus."
+            },
+            "experiment_date": {
+              "type": "string",
+              "format": "date-time",
+              "description": "ISO 8601 date-time when the experiment began."
+            },
+            "hypothesis": {
+              "type": "string",
+              "minLength": 50,
+              "description": "Formal hypothesis being tested in the experiment."
+            },
+            "core_innovation": {
+              "type": "object",
+              "description": "Summary of the conceptual mechanism and key insight that differentiates the method.",
+              "required": [
+                "concept",
+                "mechanism",
+                "key_insight"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "concept": {
+                  "type": "string",
+                  "description": "High-level conceptual framing."
+                },
+                "mechanism": {
+                  "type": "string",
+                  "description": "Mechanistic or algorithmic details at a conceptual level."
+                },
+                "key_insight": {
+                  "type": "string",
+                  "description": "Concise statement of the critical innovation."
+                }
+              }
+            },
+            "experimental_validation": {
+              "type": "object",
+              "description": "Empirical evaluation details for the experiment.",
+              "required": [
+                "sample_size",
+                "control_group",
+                "results",
+                "statistical_analysis"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "sample_size": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "description": "Number of trials or sequences evaluated."
+                },
+                "control_group": {
+                  "type": "boolean",
+                  "description": "Indicates whether a control/baseline group was used."
+                },
+                "results": {
+                  "type": "array",
+                  "description": "Per-trial results capturing accuracy and energy scores.",
+                  "items": {
+                    "$ref": "#/$defs/proteinFoldingResult"
+                  }
+                },
+                "statistical_analysis": {
+                  "type": "object",
+                  "description": "Statistical analysis parameters and outcomes.",
+                  "required": [
+                    "p_value",
+                    "confidence_interval"
+                  ],
+                  "additionalProperties": false,
+                  "properties": {
+                    "p_value": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 1,
+                      "description": "p-value from the chosen statistical test."
+                    },
+                    "confidence_interval": {
+                      "type": "string",
+                      "description": "Confidence interval (free-form), e.g., '95% CI [-0.12, -0.05]'."
+                    }
+                  }
+                }
+              }
+            },
+            "performance_metrics": {
+              "type": "object",
+              "description": "Aggregate performance metrics derived from the experiment.",
+              "required": [
+                "accuracy",
+                "speed_value",
+                "speed_unit",
+                "resource_utilization"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "accuracy": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1,
+                  "description": "Aggregate accuracy (0\u20131)."
+                },
+                "speed_value": {
+                  "type": "number",
+                  "minimum": 0,
+                  "description": "Numeric value representing speed or throughput."
+                },
+                "speed_unit": {
+                  "type": "string",
+                  "description": "Unit for the speed_value (e.g., 'steps/second', 'iterations/minute')."
+                },
+                "resource_utilization": {
+                  "type": "string",
+                  "description": "Free-form description of compute/memory usage."
+                }
+              }
+            },
+            "algorithm_specifications": {
+              "type": "object",
+              "description": "Algorithm configuration used in the experiment.",
+              "required": [
+                "algorithm_name",
+                "version",
+                "parameters"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "algorithm_name": {
+                  "type": "string",
+                  "description": "Human-readable algorithm name."
+                },
+                "version": {
+                  "type": "string",
+                  "description": "Algorithm or implementation version string."
+                },
+                "parameters": {
+                  "type": "object",
+                  "description": "Key-value parameters used (domain-specific)."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "dataFile": {
+      "type": "object",
+      "description": "Descriptor for an experimental data file (log, CSV, JSON, etc.).",
+      "required": [
+        "filename",
+        "format",
+        "size_bytes"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "filename": {
+          "type": "string",
+          "description": "File name with extension."
+        },
+        "format": {
+          "type": "string",
+          "description": "File format/extension, e.g., 'csv', 'json'."
+        },
+        "size_bytes": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "File size in bytes (0 allowed if unknown)."
+        }
+      }
+    },
+    "codeFile": {
+      "type": "object",
+      "description": "Descriptor for a code artifact associated with the experiment.",
+      "required": [
+        "filename",
+        "language",
+        "lines_of_code"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "filename": {
+          "type": "string",
+          "description": "Source file name (e.g., 'experiment.py')."
+        },
+        "language": {
+          "type": "string",
+          "description": "Programming language (e.g., 'Python')."
+        },
+        "lines_of_code": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Approximate source line count."
+        }
+      }
+    },
+    "imageFile": {
+      "type": "object",
+      "description": "Descriptor for an image or plot produced by the experiment.",
+      "required": [
+        "filename",
+        "caption"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "filename": {
+          "type": "string",
+          "description": "Image filename (e.g., 'plot.png')."
+        },
+        "caption": {
+          "type": "string",
+          "description": "Short caption describing the visualization."
+        }
+      }
+    },
+    "scaleResults": {
+      "type": "object",
+      "description": "Metric/value pair summarizing performance across problem scales.",
+      "required": [
+        "metric",
+        "value"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "metric": {
+          "type": "string",
+          "description": "Name of the performance metric (e.g., 'cost_reduction')."
+        },
+        "value": {
+          "type": "number",
+          "description": "Numeric value associated with the metric."
+        }
+      }
+    },
+    "algorithmResults": {
+      "type": "object",
+      "description": "Aggregated outcome summary for a named algorithm configuration.",
+      "required": [
+        "algorithm",
+        "duration",
+        "success_rate"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "algorithm": {
+          "type": "string",
+          "description": "Algorithm name or label."
+        },
+        "duration": {
+          "type": "string",
+          "format": "duration",
+          "description": "ISO 8601 duration representing total run time (e.g., 'PT1H30M')."
+        },
+        "success_rate": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Success rate as a fraction between 0 and 1."
+        }
+      }
+    },
+    "trial": {
+      "type": "object",
+      "description": "Single trial entry capturing parameters and outcome.",
+      "required": [
+        "trial_id",
+        "parameters",
+        "outcome"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "trial_id": {
+          "type": "string",
+          "description": "Unique identifier for the trial."
+        },
+        "parameters": {
+          "type": "object",
+          "description": "Arbitrary key-value configuration used for this trial."
+        },
+        "outcome": {
+          "type": "string",
+          "description": "Free-form outcome or label (e.g., 'success', 'fail')."
+        }
+      }
+    },
+    "proteinFoldingResult": {
+      "type": "object",
+      "description": "Per-trial protein folding result including accuracy and energy score.",
+      "required": [
+        "trial_id",
+        "folding_accuracy",
+        "energy_score"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "trial_id": {
+          "type": "string",
+          "description": "Unique identifier for the folding trial."
+        },
+        "folding_accuracy": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Accuracy of the folding prediction (0\u20131)."
+        },
+        "energy_score": {
+          "type": "number",
+          "description": "Energy metric (domain-specific scale)."
+        }
+      }
+    }
+  }
+}

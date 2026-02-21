@@ -1,0 +1,134 @@
+{
+  "ForgettingEngine": {
+    "metadata": {
+      "invention_title": "System and Method for Optimization through Strategic Elimination with Paradox Retention",
+      "inventor": "Derek Louis Angell",
+      "organization": "CONEXUS",
+      "date_of_invention": "2025-10-13",
+      "document_types": [
+        "provisional_patent_application",
+        "experimental_report",
+        "conceptual_framework",
+        "philosophical_analysis"
+      ]
+    },
+    "background": {
+      "problem": [
+        "Traditional optimization (e.g., Monte Carlo algorithms) are inefficient in complex, high-dimensional domains.",
+        "Common issues include poor convergence, local minima traps, and wasted computation on non-viable solution paths."
+      ],
+      "need": [
+        "Modern problems like protein folding and large-scale AI demand better efficiency and higher-order logic.",
+        "No prior method systematically preserves paradox (contradictory yet promising candidates) during optimization."
+      ]
+    },
+    "summary_of_invention": {
+      "description": "The Forgetting Engine treats elimination\u2014not search\u2014as the core computational act. At each iteration, non-viable candidates are aggressively pruned, while contradictory (paradoxical) candidates with potential are preserved for enhanced discovery.",
+      "innovations": [
+        "Strategic Elimination as a computational primitive",
+        "Paradox Retention Mechanism enabled by metrics (SCS, EPI, DCM)",
+        "Population-based parallel exploration maintaining diversity",
+        "Dual-gated optimization loop with retention and elimination gates"
+      ]
+    },
+    "algorithm": {
+      "phases": [
+        "Initialization: Generate a population of N candidates (optimal N\u224850)",
+        "Evaluation: Assess candidate solutions",
+        "Strategic Elimination: Remove 20\u201340% worst performing candidates",
+        "Paradox Retention: Preserve contradictory/paradoxical candidates with long-term promise",
+        "Population Management: Replenish population via mutation/recombination"
+      ],
+      "paradox_metrics": [
+        {
+          "name": "SCS",
+          "description": "Systemic Coherence Score, measures overall contribution to solution objective"
+        },
+        {
+          "name": "EPI",
+          "description": "Energetic Paradox Index, quantifies tension between immediate and future utility"
+        },
+        {
+          "name": "DCM",
+          "description": "Diversity Contribution Metric, balances memory cost vs. opportunity cost"
+        }
+      ]
+    },
+    "experimental_validation": {
+      "benchmark": "Protein Folding (2D Lattice HP Model, 20 residues)",
+      "algorithms_compared": [
+        "Forgetting Engine",
+        "Monte Carlo (Metropolis Criterion)"
+      ],
+      "metrics": [
+        {
+          "name": "Success Rate",
+          "Forgetting Engine": 45,
+          "Monte Carlo": 25,
+          "improvement": "80% relative"
+        },
+        {
+          "name": "Convergence Speed (avg steps)",
+          "Forgetting Engine": 367,
+          "Monte Carlo": 789,
+          "improvement": "2.15x faster"
+        },
+        {
+          "name": "Best Energy",
+          "Forgetting Engine": -9.23,
+          "Monte Carlo": -8.12,
+          "improvement": "14% better minima"
+        }
+      ],
+      "statistics": {
+        "p-value": "<0.001",
+        "effect_size": "Cohen's d=1.7 (large)"
+      }
+    },
+    "architecture": {
+      "core_components": [
+        "Population Manager",
+        "Strategic Elimination Engine",
+        "Evaluation Framework",
+        "Paradox Detection Module",
+        "Forgetting Mechanism"
+      ],
+      "dual_gated_loop": {
+        "retention_gate": "Selects info for memory",
+        "elimination_gate": "Prunes based on paradox metrics",
+        "cycle": "Propose \u2192 Evaluate \u2192 Perform gating (retain/discard) \u2192 Record"
+      }
+    },
+    "comparisons": [
+      {
+        "prior_art": "Monte Carlo",
+        "note": "Searches, doesn't eliminate non-viables with paradox retention"
+      },
+      {
+        "prior_art": "Genetic Algorithms",
+        "note": "Maintains diversity, but less aggressive pruning"
+      },
+      {
+        "prior_art": "Extremal Optimization",
+        "note": "Single solution focus, no population with paradox retention"
+      }
+    ],
+    "applications": [
+      "Protein folding solutions",
+      "Neural architecture search",
+      "Feature selection in AutoML",
+      "Scheduling, route planning, combinatorial optimization",
+      "Therapeutics, creative AI, business process optimization"
+    ],
+    "philosophy": {
+      "core_thesis": "Elimination\u2014not accumulation or search\u2014is the fundamental computational act in optimization and intelligence.",
+      "paradox": "Forgetting can systematically produce better solutions than remembering in complex, high-entropy domains."
+    },
+    "patent_claims": [
+      "Iterative elimination of worst-performing candidates with paradoxical candidate retention.",
+      "Population-based, diversity-preserving optimization.",
+      "Explicit paradox metrics for elimination/retention decisions.",
+      "Demonstrable improvement over Monte Carlo and genetic methods."
+    ]
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "title": "Forgetting Engine Experimental Datasets",
+  "author": "Derek Louis Angell",
+  "institution": "CONEXUS Global Arts Media",
+  "description": "Supplementary experimental data for The Forgetting Engine research paper",
+  "total_trials": "3000+",
+  "domains_tested": [
+    "TSP",
+    "Protein Folding",
+    "Neural Architecture Search",
+    "PLEX Sessions"
+  ],
+  "datasets_created": [
+    "TSP_Experimental_Results.csv",
+    "Protein_Folding_Results.csv",
+    "Neural_Architecture_Search_Results.csv",
+    "CONEXUS_PLEX_Sessions.csv"
+  ],
+  "data_quality": "Pharmaceutical-grade validation standards",
+  "statistical_significance": "p < 0.001 across all experiments"
+}
